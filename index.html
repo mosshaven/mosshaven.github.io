@@ -3,35 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>slutvibe</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>mosshaven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         :root {
-            --md-sys-color-primary: #BB86FC;
-            --md-sys-color-surface: #1E1E1E;
-            --md-sys-color-background: #121212;
-            --md-sys-color-on-surface: #E1E1E1;
-            --md-elevation-1: 0px 3px 8px -1px rgba(0, 0, 0, 0.2);
-            --md-elevation-2: 0px 5px 12px -3px rgba(0, 0, 0, 0.3);
+            --primary-green: #6A994E; /* Мшистый зеленый */
+            --light-green: #A7C957;  /* Светлый акцентный зеленый */
+            --background-dark: #1B1B1B; /* Очень темный фон */
+            --surface-dark: #242424; /* Цвет карточек */
+            --on-surface: #E0E0E0; /* Цвет текста */
+            --glow-color: rgba(106, 153, 78, 0.5);
         }
 
         body {
-            background: var(--md-sys-color-background);
-            color: var(--md-sys-color-on-surface);
+            background-color: var(--background-dark);
+            color: var(--on-surface);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .profile {
@@ -39,161 +51,164 @@
             flex-direction: column;
             align-items: center;
             gap: 2rem;
-            padding: 4rem 0;
-            animation: scaleIn 0.6s ease-out;
+            padding: 5rem 0;
+            text-align: center;
         }
 
         .avatar {
             width: 180px;
             height: 180px;
             border-radius: 50%;
+            /* -- ИЗМЕНЕННАЯ ССЫЛКА НА АВАТАР -- */
             background: url('https://avatars.githubusercontent.com/u/134005418?v=4') center/cover;
-            box-shadow: var(--md-elevation-1);
-            transition: all 0.2s ease;
-            animation: scaleIn 0.8s ease-out;
+            border: 3px solid var(--primary-green);
+            box-shadow: 0 0 20px var(--glow-color), 0 0 30px var(--glow-color) inset;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeIn 1s ease-out, float 6s ease-in-out infinite;
         }
 
         .avatar:hover {
-            transform: scale(1.02);
-            box-shadow: var(--md-elevation-2);
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 0 30px var(--glow-color), 0 0 40px var(--glow-color) inset;
         }
 
         .profile-info {
-            text-align: center;
-            animation: fadeInUp 0.8s ease-out;
+            animation: fadeIn 1.2s ease-out;
         }
 
         .profile-info h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            font-weight: 500;
-            color: var(--md-sys-color-primary);
+            background: linear-gradient(45deg, var(--light-green), var(--primary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: text-glow 2s ease-in-out infinite alternate;
         }
 
         .profile-info p {
             font-size: 1.1rem;
-            opacity: 0.9;
+            opacity: 0.8;
             font-weight: 300;
+            max-width: 500px;
         }
 
         .actions {
             display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
             flex-wrap: wrap;
             justify-content: center;
-            animation: fadeInUp 1s ease-out;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
         }
 
         .md-button {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.7rem 1.2rem;
-            border-radius: 16px;
+            gap: 0.7rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.2s ease;
-            background: var(--md-sys-color-surface);
-            color: var(--md-sys-color-primary);
-            border: 1px solid rgba(187, 134, 252, 0.1);
+            transition: all 0.3s ease;
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+            letter-spacing: 0.5px;
         }
 
         .md-button:hover {
-            background: rgba(187, 134, 252, 0.1);
-            transform: translateY(-2px);
+            background: var(--primary-green);
+            color: var(--background-dark);
+            box-shadow: 0 0 20px var(--glow-color);
+            transform: translateY(-5px);
         }
 
         .md-button i {
             font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-button:hover i {
+            transform: scale(1.1);
         }
 
         .project-card {
-            background: var(--md-sys-color-surface);
-            border-radius: 28px;
-            padding: 1.5rem;
+            background: var(--surface-dark);
+            border-radius: 20px;
+            padding: 2rem;
             margin: 2rem 0;
-            transition: all 0.2s ease;
-            border: 1px solid rgba(187, 134, 252, 0.1);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(106, 153, 78, 0.2);
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px) scale(0.98);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(167, 201, 87, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
         }
 
         .project-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--md-elevation-1);
+            transform: translateY(-5px) scale(1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(106, 153, 78, 0.5);
         }
 
         .project-card h3 {
-            color: var(--md-sys-color-primary);
+            color: var(--light-green);
             margin-bottom: 1rem;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 500;
         }
 
         .project-card p {
             margin-bottom: 1rem;
             font-weight: 300;
+            opacity: 0.9;
         }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .project-links a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            background: var(--md-sys-color-surface);
-            color: var(--md-sys-color-primary);
-            border: 1px solid rgba(187, 134, 252, 0.1);
-            font-size: 0.9rem;
-        }
-
-        .project-links a:hover {
-            background: rgba(187, 134, 252, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .project-links a i {
-            font-size: 1rem;
-        }
-
+        
         html {
             scroll-behavior: smooth;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes text-glow {
+            from { text-shadow: 0 0 5px var(--light-green), 0 0 10px var(--light-green); }
+            to { text-shadow: 0 0 10px var(--light-green), 0 0 20px var(--primary-green); }
         }
 
         .project-card.visible {
-            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
         }
 
         #projects {
@@ -203,59 +218,71 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div id="particles-js"></div>
     <div class="container">
-        <div class="profile">
+        <header class="profile">
             <div class="avatar"></div>
             <div class="profile-info">
-                <h1>Привет, я slutvibe.</h1>
+                <h1>Привет, я mosshaven.</h1>
                 <p>Балуюсь с AI, делаю ботов и прочую хрень.</p>
                 <div class="actions">
-                    <a href="https://t.me/slutvibe" class="md-button">
+                    <a href="https://t.me/mosshaven" class="md-button" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-telegram"></i>
                         Telegram
                     </a>
-                    <a href="https://github.com/slutvibe" class="md-button">
+                    <a href="https://github.com/mosshaven" class="md-button" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-github"></i>
                         GitHub
                     </a>
                     <a href="#projects" class="md-button">
-                        <i class="fas fa-project-diagram"></i>
+                        <i class="fas fa-stream"></i>
                         Проекты
                     </a>
-                </div>
-            </div>
-        </div>
-
-        <section id="projects">
-            <div class="project-card">
-                <h3>SimpleAI Extended</h3>
-                <p>Перерождённый SimpleAI. Бот, который повторяет сообщения из словаря. <strong>(Может выбрать подходящий по его мнению ответ)</strong></p>
-                <div class="project-links">
-                    <a href="https://t.me/simpleai_extended">
-                        <i class="fas fa-broadcast-tower"></i>
-                        Канал
-                    </a>
-                    <a href="https://t.me/lerochka_botyara_bot">
-                        <i class="fas fa-robot"></i>
-                        Бот
+                    <!-- -- ДОБАВЛЕННАЯ КНОПКА -- -->
+                    <a href="https://mosshaven.github.io/sky4arg/messages.html" class="md-button" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-comments"></i>
+                        Диалог с владельцем GASD
                     </a>
                 </div>
             </div>
+        </header>
 
-            <div class="project-card">
+        <main id="projects">
+            <section class="project-card">
                 <h3>CIYH</h3>
-                <p>Бот отправляющий сообщения в канал.</p>
-                <div class="project-links">
-                    <a href="https://github.com/slutvibe/channelinyourhands">
+                <p>Бот отправляющий сообщения в канал. Простой и удобный инструмент для управления вашим каналом прямо из рук.</p>
+                <div class="actions">
+                    <a href="https://github.com/mosshaven/channelinyourhands" class="md-button" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-github"></i>
                         Репозиторий
                     </a>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
     </div>
 
+    <!-- Библиотека для анимации частиц -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
+        // Инициализация particles.js
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#6A994E" },
+                "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
+                "opacity": { "value": 0.3, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 3, "random": true, "anim": { "enable": false } },
+                "line_linked": { "enable": true, "distance": 150, "color": "#6A994E", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 4 } }
+            },
+            "retina_detect": true
+        });
+
         // Анимация появления карточек проектов при скролле
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -269,16 +296,6 @@
 
         document.querySelectorAll('.project-card').forEach(card => {
             observer.observe(card);
-        });
-
-        // Плавная прокрутка к проектам с задержкой для эффекта
-        document.querySelector('a[href="#projects"]').addEventListener('click', function(e) {
-            e.preventDefault();
-            setTimeout(() => {
-                document.querySelector('#projects').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }, 200);
         });
     </script>
 </body>
