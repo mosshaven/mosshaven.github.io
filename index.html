@@ -34,6 +34,36 @@
             width: 100%;
             height: 100%;
             top: 0;
+            left@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        :root {
+            --primary-green: #6A994E; /* Мшистый зеленый */
+            --light-green: #A7C957;  /* Светлый акцентный зеленый */
+            --background-dark: #1B1B1B; /* Очень темный фон */
+            --surface-dark: #242424; /* Цвет карточек */
+            --on-surface: #E0E0E0; /* Цвет текста */
+            --glow-color: rgba(106, 153, 78, 0.5);
+        }
+
+        body {
+            background-color: var(--background-dark);
+            color: var(--on-surface);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
             left: 0;
             z-index: -1;
         }
@@ -68,7 +98,153 @@
 
         .avatar:hover {
             transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 0 30px var(--: 0;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: url('https://avatars.githubusercontent.com/u/134005418?v=4') center/cover;
+            border: 3px solid var(--primary-green);
+            box-shadow: 0 0 20px var(--glow-color), 0 0 30px var(--glow-color) inset;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeIn 1s ease-out, float 6s ease-in-out infinite;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05) rotate(5deg);
             box-shadow: 0 0 30px var(--glow-color), 0 0 40px var(--glow-color) inset;
+        }
+
+        .profile-info {
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        .profile-info h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--light-green), var(--primary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: text-glow 2s ease-in-out infinite alternate;
+        }
+
+        .profile-info p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            font-weight: 300;
+            max-width: 500px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        .md-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+            letter-spacing: 0.5px;
+        }
+
+        .md-button:hover {
+            background: var(--primary-green);
+            color: var(--background-dark);
+            box-shadow: 0 0 20px var(--glow-color);
+            transform: translateY(-5px);
+        }
+
+        .md-button i {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .md-button:hover i {
+            transform: scale(1.1);
+        }
+
+        .project-card {
+            background: var(--surface-dark);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(106, 153, 78, 0.2);
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(167, 201, 87, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px) scale(1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(106, 153, 78, 0.5);
+        }
+
+        .project-card h3 {
+            color: var(--light-green);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .project-card p {
+            margin-bottom: 1rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        html {
+            scroll-behavior: smooth;glow-color), 0 0 40px var(--glow-color) inset;
         }
 
         .profile-info {
@@ -234,9 +410,8 @@
                         <i class="fab fa-github"></i>
                         GitHub
                     </a>
-                    <!-- -- ДОБАВЛЕННАЯ КНОПКА С КАКАШКОЙ -- -->
                     <a href="https://t.me/mossvibe" class="md-button" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-poo"></i>
+                        <i class="fas fa-comments"></i>
                         Блог
                     </a>
                     <a href="#projects" class="md-button">
@@ -244,8 +419,122 @@
                         Проекты
                     </a>
                     <a href="https://mosshaven.github.io/sky4arg/messages.html" class="md-button" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-comments"></i>
+                        <i class="fas fa-poo"></i>
                         Диалог с владельцем GASD
+                    </a>
+                    <a href="https://mosshaven.github.io/gasd/proceeded_messages.html" class="md-button" target="_blank
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes text-glow {
+            from { text-shadow: 0 0 5px var(--light-green), 0 0 10px var(--light-green); }
+            to { text-shadow: 0 0 10px var(--light-green), 0 0 20px var(--primary-green); }
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
+        }
+
+        #projects {
+            scroll-margin-top: 2rem;
+        }
+    </style>
+    <!-- Убедитесь, что эта ссылка на Font Awesome подключена для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="container">
+        <header class="profile">
+            <div class="avatar"></div>
+            <div class="profile-info">
+                <h1>Привет, я mosshaven.</h1>
+                <p>Балуюсь с AI, делаю ботов и прочую хрень.</p>
+                <div class="actions">
+                    <a href="https://t.me/mosshaven" class="md-button" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-telegram"></i>
+                        Telegram
+                    </a>
+                    <a href="https://github.com/mosshaven" class="md-button" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                    <a href="https://t.me/mossvibe" class="md-button" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-comments"></i> <!-- Иконка изменена -->
+                        Блог
+                    </a>
+                    <a href="#projects" class="md-button">
+                        <i class="fas fa-stream"></i>
+                        Проекты
+                    </a>
+                    <a href="https://mosshaven.github.io/sky4arg/messages.html" class="md-button" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-poo"></i> <!-- Иконка изменена -->
+                        Диалог с владельцем GASD
+                    </a>
+                    <!-- ++ ДОБАВЛЕНА НОВАЯ КНОПКА ++ -->
+                    <a href="https://mosshaven.github.io/gasd/proceeded_messages.html" class="md-button" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-poo"></i>
+                        переговоры GASD и RT
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main id="projects">
+             <section class="project-card">
+                <h3>CIYH</h3>
+                <p>Бот отправляющий сообщения в канал. Простой и удобный инструмент для управления вашим каналом прямо из рук.</p>
+                <div class="actions">
+                    <a href="https://github.com/mosshaven/channelinyourhands" class="md-button" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                        Репозиторий
+                    </a>
+                </div>
+            </section>
+            
+            <section class="project-card">
+                <h3>Zygo</h3>
+                <p>Zygo (Заго на рус.) - это многопользовательский, и анонимный бот из семейства Echo-to-all</p>
+                <div class="actions">
+                    <a href="https://t.me/zygoapp" class="md-button" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-telegram"></i>
+                        Канал
+                    </a>
+                    <a href="https://t.me/zygoabot" class="md-button" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-robot"></i>
+                        Бот
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Библиотека для анимации частиц -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Инициализация particles.js
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_" rel="noopener noreferrer">
+                        <i class="fas fa-poo"></i>
+                        переговоры GASD и RT
                     </a>
                 </div>
             </div>
@@ -287,6 +576,39 @@
         particlesJS('particles-js', {
             "particles": {
                 "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#6A994E" },
+                "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
+                "opacity": { "value": 0.3, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 3, "random": true, "anim": { "enable": false } },
+                "line_linked": { "enable": true, "distance": 150, "color": "#6A994E", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 4 } }
+            },
+            "retina_detect": true
+        });
+
+        // Анимация появления карточек проектов при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
+```area": 800 } },
                 "color": { "value": "#6A994E" },
                 "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" } },
                 "opacity": { "value": 0.3, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
