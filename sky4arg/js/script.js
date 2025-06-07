@@ -12,6 +12,7 @@ function CheckLocation() {
     } else if (hash == "#allow_back") {
         window.AllowBackFromHistory = true;
     }
+    checkGlobalWarningState(); // Check warning state on load
 }
 
 function ShowToast(text) {
@@ -208,4 +209,29 @@ function GoBack(anchor) {
         location.href = destination;
     }, 100);
     return false;
+}
+
+function dismissGlobalWarning() {
+    var warningElement = document.getElementById('globalWarningMessage');
+    if (warningElement) {
+        warningElement.style.display = 'none';
+        try {
+            sessionStorage.setItem('globalWarningDismissed', 'true');
+        } catch (e) {
+            console.warn('localStorage is not available or failed to set item:', e);
+        }
+    }
+}
+
+function checkGlobalWarningState() {
+    try {
+        if (sessionStorage.getItem('globalWarningDismissed') === 'true') {
+            var warningElement = document.getElementById('globalWarningMessage');
+            if (warningElement) {
+                warningElement.style.display = 'none';
+            }
+        }
+    } catch (e) {
+        console.warn('localStorage is not available or failed to get item:', e);
+    }
 }
