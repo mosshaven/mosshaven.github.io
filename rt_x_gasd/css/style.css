@@ -1,0 +1,406 @@
+/*
+ * MODERN CSS REDESIGN (DARK THEME) - FIXED VERSION
+ * --------------------------------
+ * - Полностью переработанный дизайн в зеленой теме.
+ * - ИСПРАВЛЕНА верстка сообщений для соответствия оригиналу.
+ * - Сохранены все оригинальные классы.
+ * - Улучшена читаемость и визуальная иерархия.
+ */
+
+ :root {
+    /* Цветовая палитра (Зелёная тёмная тема) */
+    --color-primary: #4CAF50; /* Material Green 500 */
+    --color-primary-light: #81C784; /* Material Green 300 */
+    --color-primary-bg: rgba(76, 175, 80, 0.15);
+    --color-primary-bg-hover: rgba(76, 175, 80, 0.25);
+    --color-text-main: #E8E8E8;
+    --color-text-secondary: #C0C0C0;
+    --color-text-details: #7A7A7A; /* Сделано немного темнее по запросу */
+    --color-text-light: #FFFFFF;
+    --color-text-code: #A5D6A7; /* Светло-зеленый для кода */
+    --color-bg-main: #212B21; /* Очень темный десатурированный зеленый */
+    --color-bg-secondary: #2E3A2E; /* Темно-зеленый */
+    --color-bg-tertiary: #3A4A3A; /* Средне-темный зеленый */
+    --color-bg-code: #263326; /* Фон для блоков кода */
+    --color-bg-selected: #3A4A3A; /* Такой же как tertiary для выделенных сообщений */
+    --color-border: rgba(129, 199, 132, 0.2); /* Прозрачный светло-зеленый */
+    --color-spoiler: #405140;
+    --color-spoiler-hidden: #313D31;
+    --color-toast-bg: rgba(0, 0, 0, 0.8);
+    --color-video-overlay: rgba(0, 0, 0, 0.5);
+
+    /* Цвета Userpic (остаются яркими для контраста, если используются) */
+    --color-red: #ff5555;
+    --color-green: #64bf47; /* Этот зеленый может использоваться для индикаторов */
+    --color-yellow: #ffab00;
+    --color-blue: #4f9cd9;
+    --color-purple: #9884e8;
+    --color-pink: #e671a5;
+    --color-sea: #47bcd1;
+    --color-orange: #ff8c44;
+
+    /* Типографика и размеры (без изменений) */
+    --font-family-main: 'Open Sans', "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif;
+    --font-family-mono: Menlo, Monaco, Consolas, "Courier New", monospace;
+    --font-size-base: 13px;
+    --line-height-base: 1.5;
+    --border-radius-small: 4px;
+    --border-radius-normal: 8px;
+    --border-radius-large: 12px;
+    --border-radius-round: 50%;
+    --site-width: 480px;
+    --header-height: 64px;
+}
+
+/* --- 1. Общие стили и сбросы --- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font: var(--font-size-base) / var(--line-height-base) var(--font-family-main);
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+}
+
+strong { font-weight: 700; }
+code, kbd, pre, samp { font-family: var(--font-family-mono); }
+
+code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: var(--color-text-code);
+    background-color: var(--color-bg-code);
+    border-radius: var(--border-radius-small);
+}
+
+pre {
+    display: block;
+    margin: 0;
+    padding: 10px;
+    font-size: inherit;
+    line-height: 1.4;
+    word-break: break-all;
+    word-wrap: break-word;
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-normal);
+    overflow: auto;
+}
+
+/* --- 2. Утилиты --- */
+.clearfix:after { content: " "; visibility: hidden; display: block; height: 0; clear: both; }
+.pull_left { float: left; }
+.pull_right { float: right; }
+.bold { font-weight: 700; }
+.details { color: var(--color-text-details); }
+.with_divider { border-top: 1px solid var(--color-border); }
+
+/* --- 3. Структура страницы --- */
+.page_wrap { background-color: var(--color-bg-main); color: var(--color-text-main); }
+.page_wrap a { color: var(--color-primary); text-decoration: none; }
+.page_wrap a:hover { text-decoration: underline; }
+.page_header {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 10;
+}
+.page_header .content { width: var(--site-width); margin: 0 auto; }
+.page_header .content .text {
+    padding: 24px 24px 22px 24px;
+    font-size: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.page_header a.content {
+    background-repeat: no-repeat;
+    background-position: 24px 21px;
+    background-size: 24px 24px;
+}
+.page_header a.content .text { padding: 24px 24px 22px 82px; }
+.page_body { width: var(--site-width); margin: 0 auto; padding-top: var(--header-height); }
+.page_about { padding: 24px; }
+
+/* --- 4. Компоненты --- */
+.userpic_link, .story { display: block; text-decoration: none; }
+.userpic { display: block; border-radius: var(--border-radius-round); overflow: hidden; }
+.userpic .initials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; height: 100%;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    user-select: none;
+    font-weight: 600;
+}
+.story { border-radius: var(--border-radius-normal); }
+
+/* --- 5. Сообщения и история чата (ВЕРСТКА ИСПРАВЛЕНА) --- */
+.history { padding: 16px 0; }
+.message { margin: 0 -10px; transition: background-color 2.0s ease; }
+div.selected { background-color: var(--color-bg-selected); transition: background-color 0.5s ease; }
+
+/* Обычное сообщение */
+.default {
+    padding: 10px;
+    overflow: auto; /* Современный аналог clearfix для очистки float */
+}
+.default.joined { margin-top: -10px; }
+.default .userpic { width: 40px; height: 40px; float: left; /* Аватар прижимается влево */ }
+.message .userpic .initials { font-size: 16px; }
+
+.default .body {
+    margin-left: 60px; /* Текст отодвигается от аватара */
+}
+.default .from_name {
+    color: var(--color-primary-light);
+    font-weight: 700;
+    padding-bottom: 5px;
+}
+.default .from_name .details { font-weight: normal; color: var(--color-text-details); }
+.default .text {
+    word-wrap: break-word;
+    line-height: 1.5;
+    unicode-bidi: plaintext;
+    text-align: start;
+}
+
+/* Сервисные сообщения */
+.service { padding: 10px 24px; text-align: center; }
+.service .body { color: var(--color-text-details); }
+.service .userpic { margin: 0 auto; width: 48px; height: 48px; }
+.service .userpic .initials { font-size: 24px; }
+
+
+/* --- 6. Медиа-вложения --- */
+.default .reply_to, .default .media_wrap { padding-bottom: 5px; }
+.default .media { margin: 0 -10px; padding: 5px 10px; }
+.default .media .fill, .default .media .thumb { width: 48px; height: 48px; border-radius: var(--border-radius-round); }
+.default .media .fill { background-repeat: no-repeat; background-position: center; background-size: 24px 24px; }
+.default .media .title { padding-top: 4px; font-size: 14px; font-weight: 600; }
+.default .media .description, .default .media .status { color: var(--color-text-details); padding-top: 4px; font-size: 13px; }
+
+.default .video_file_wrap, .default .animated_wrap { position: relative; }
+.default .video_file, .default .animated, .default .photo, .default .sticker { display: block; border-radius: var(--border-radius-normal); overflow: hidden;}
+.video_duration {
+    position: absolute; right: 5px; bottom: 5px;
+    padding: 1px 6px;
+    font-size: 11px;
+    color: var(--color-text-light);
+    background: var(--color-video-overlay);
+    border-radius: var(--border-radius-small);
+    z-index: 2;
+}
+/* Остальные стили для видео и GIF остаются без изменений */
+.video_play_bg { background:rgba(0,0,0,.4); width:40px; height:40px; line-height:0; position:absolute; z-index:2; border-radius:50%; overflow:hidden; margin:-20px auto 0 -20px; top:50%; left:50%; pointer-events:none; }
+.video_play { position:absolute; display:inline-block; top:50%; left:50%; margin-left:-5px; margin-top:-9px; z-index:1; width:0; height:0; border-style:solid; border-width:9px 0 9px 14px; border-color:transparent transparent transparent #fff; }
+.gif_play { font-weight:700; color:#FFF; display:block; line-height:40px; font-size:13px; text-align:center; }
+
+
+/* --- Цвета Userpic --- */
+.color_red, .userpic1, .media_call .fill, .media_file .fill, .media_live_location .fill { background-color: var(--color-red); }
+.color_green, .userpic2, .media_call.success .fill, .media_photo .fill { background-color: var(--color-green); }
+.color_yellow, .userpic3, .media_venue .fill { background-color: var(--color-yellow); }
+.color_blue, .userpic4, .media_audio_file .fill, .media_voice_message .fill { background-color: var(--color-blue); }
+.color_purple, .userpic5, .media_game .fill { background-color: var(--color-purple); }
+.color_pink, .userpic6, .media_invoice .fill { background-color: var(--color-pink); }
+.color_sea, .userpic7, .media_location .fill, .media_video .fill { background-color: var(--color-sea); }
+.color_orange, .userpic8, .media_contact .fill { background-color: var(--color-orange); }
+
+
+/* --- Иконки --- */
+/* Все иконки остаются без изменений */
+.section.calls { background-image: url(../images/section_calls.png); }
+.section.chats { background-image: url(../images/section_chats.png); }
+.section.contacts { background-image: url(../images/section_contacts.png); }
+.section.frequent { background-image: url(../images/section_frequent.png); }
+.section.photos { background-image: url(../images/section_photos.png); }
+.section.sessions { background-image: url(../images/section_sessions.png); }
+.section.stories { background-image: url(../images/section_stories.png); }
+.section.web { background-image: url(../images/section_web.png); }
+.section.other { background-image: url(../images/section_other.png); }
+.page_header a.content { background-image: url(../images/back.png); }
+.media_call .fill { background-image: url(../images/media_call.png); }
+.media_contact .fill { background-image: url(../images/media_contact.png); }
+.media_file .fill { background-image: url(../images/media_file.png); }
+.media_game .fill { background-image: url(../images/media_game.png); }
+.media_live_location .fill, .media_location .fill, .media_venue .fill { background-image: url(../images/media_location.png); }
+.media_audio_file .fill { background-image: url(../images/media_music.png); }
+.media_invoice .fill { background-image: url(../images/media_shop.png); }
+.media_voice_message .fill { background-image: url(../images/media_voice.png); }
+.media_photo .fill { background-image: url(../images/media_photo.png); }
+.media_video .fill { background-image: url(../images/media_video.png); }
+
+@media only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+    .section.calls { background-image: url(../images/section_calls@2x.png); }
+    .section.chats { background-image: url(../images/section_chats@2x.png); }
+    .section.contacts { background-image: url(../images/section_contacts@2x.png); }
+    .section.frequent { background-image: url(../images/section_frequent@2x.png); }
+    .section.photos { background-image: url(../images/section_photos@2x.png); }
+    .section.sessions { background-image: url(../images/section_sessions@2x.png); }
+    .section.stories { background-image: url(../images/section_stories@2x.png); }
+    .section.web { background-image: url(../images/section_web@2x.png); }
+    .section.other { background-image: url(../images/section_other@2x.png); }
+    .page_header a.content { background-image: url(../images/back@2x.png); }
+    .media_call .fill { background-image: url(../images/media_call@2x.png); }
+    .media_contact .fill { background-image: url(../images/media_contact@2x.png); }
+    .media_file .fill { background-image: url(../images/media_file@2x.png); }
+    .media_game .fill { background-image: url(../images/media_game@2x.png); }
+    .media_live_location .fill, .media_location .fill, .media_venue .fill { background-image: url(../images/media_location@2x.png); }
+    .media_audio_file .fill { background-image: url(../images/media_music@2x.png); }
+    .media_invoice .fill { background-image: url(../images/media_shop@2x.png); }
+    .media_voice_message .fill { background-image: url(../images/media_voice@2x.png); }
+    .media_photo .fill { background-image: url(../images/media_photo@2x.png); }
+    .media_video .fill { background-image: url(../images/media_video@2x.png); }
+}
+
+/* Остальные стили, не относящиеся к сообщениям, сохранены с тёмной темой */
+/* Кнопки, реакции, спойлеры и т.д. */
+
+/* --- Styles for Reply Quotes --- */
+.reply_quote {
+    display: block;
+    padding: 8px 10px;
+    margin: 5px 0;
+    background-color: var(--color-bg-tertiary); /* Slightly different background */
+    border-left: 3px solid var(--color-primary); /* Accent border */
+    border-radius: var(--border-radius-small);
+    text-decoration: none !important; /* Ensure no underline from link */
+    color: var(--color-text-main); /* Ensure text color matches main text */
+}
+
+.reply_quote:hover {
+    background-color: var(--color-bg-selected); /* Darken slightly on hover */
+}
+
+.reply_quote_sender {
+    font-weight: bold;
+    color: var(--color-primary-light); /* Use a primary color for the sender */
+    margin-bottom: 3px;
+    font-size: 0.9em;
+}
+
+.reply_quote_text {
+    font-size: 0.9em;
+    color: var(--color-text-secondary); /* Slightly dimmer text for the quote itself */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for long messages */
+    line-height: 1.4;
+}
+
+.bot_buttons_table { display:flex; flex-direction:column; gap:2px; width:100%; border-spacing:0px 2px; }
+.bot_button_row { display:table; table-layout:fixed; padding:0px; width:100%; }
+.bot_button_row div { display:table-cell; }
+.bot_button { border-radius:var(--border-radius-large); text-align:center; vertical-align:middle; background-color:var(--color-primary-bg-hover); color: var(--color-primary-light); padding: 10px; }
+.bot_button_column_separator { width:2px; }
+
+.reactions { margin:8px 0 0; display:flex; flex-wrap:wrap; gap:5px; }
+.reactions .reaction { display:inline-flex; align-items:center; height:24px; border-radius:12px; background-color:var(--color-bg-tertiary); color:var(--color-primary-light); font-weight:bold; padding:0 4px; cursor:pointer; transition:all 0.2s ease; }
+.reactions .reaction:hover { transform:translateY(-1px); }
+.reactions .reaction.active { background-color:var(--color-primary); color:var(--color-text-light); }
+.reactions .reaction .emoji { line-height:24px; margin:0 5px; font-size:15px; }
+.reactions .reaction .count { margin-right:8px; line-height:24px; font-size:12px; }
+
+.spoiler { background:var(--color-spoiler); border-radius:var(--border-radius-small); }
+.spoiler.hidden { background:var(--color-spoiler-hidden); cursor:pointer; }
+.spoiler.hidden span { opacity:0; user-select:none; }
+
+/* --- 7. Blockquotes --- */
+blockquote {
+    background-color: var(--color-bg-secondary);
+    border-left: 4px solid var(--color-primary);
+    margin: 10px 0 10px 20px;
+    padding: 10px 15px;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    border-radius: var(--border-radius-small);
+}
+
+blockquote p { /* Reset margin for paragraphs inside blockquote if any */
+    margin: 0;
+}
+
+/* --- 8. Global Notices --- */
+.global-warning {
+    background-color: hsl(124, 81%, 89%); /* Очень светлый зеленый */
+    color: #2E7D32; /* Темно-зеленый текст */
+    padding: 18px 25px;
+    margin: 20px 0;
+    border: 1px solid #A5D6A7; /* Средне-зеленая рамка */
+    border-radius: var(--border-radius-normal);
+    text-align: left;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.global-warning p {
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+}
+.global-warning p:last-child {
+    margin-bottom: 0;
+}
+
+.global-warning strong { /* Для "Внимание!" */
+    color: #1B5E20; /* Очень темный зеленый для акцента */
+    font-weight: bold;
+}
+
+.global-warning ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.global-warning li {
+    margin-bottom: 8px;
+}
+
+.global-warning a {
+    color: var(--color-primary); /* Используем основной зеленый из переменных */
+    text-decoration: none;
+}
+
+.global-warning a:hover {
+    text-decoration: underline;
+}
+
+.dismiss-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    color: var(--color-bg-main); /* Цвет кнопки закрытия, будет темным */
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.dismiss-button:hover {
+    color: #1B5E20; /* Темно-зеленый при наведении */
+}
+
+/* --- Enhancement for User Avatars (in .userpic) --- */
+.userpic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    border-radius: inherit; /* Inherit roundness from .userpic */
+}
+
+/* Optional: If initials div is still present with an img, hide initials */
+.userpic img ~ .initials,
+.userpic img + .initials {
+    display: none;
+}
