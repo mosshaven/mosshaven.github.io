@@ -107,30 +107,33 @@ pre {
     width: 100%;
     box-sizing: border-box;
 }
+
 .warning-content {
     max-width: var(--site-width);
     margin: 0 auto;
     position: relative;
-    padding: 0 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    padding: 0 40px 0 16px;
 }
+
 .warning-text {
     display: block;
     line-height: 1.5;
-    font-size: 14px;
+    padding: 4px 0;
 }
+
+.warning-text a,
 .warning-link {
     color: var(--color-primary);
     text-decoration: none;
-    font-weight: 500;
     transition: color 0.2s ease;
 }
+
+.warning-text a:hover,
 .warning-link:hover {
-    text-decoration: underline;
     color: var(--color-primary-light);
+    text-decoration: underline;
 }
+
 .close-warning {
     position: absolute;
     right: 16px;
@@ -141,17 +144,55 @@ pre {
     font-size: 20px;
     cursor: pointer;
     color: var(--color-text-secondary);
-    padding: 4px 8px;
+    padding: 4px;
     line-height: 1;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 4px;
     transition: all 0.2s ease;
 }
+
 .close-warning:hover {
     color: var(--color-text-main);
     background-color: var(--color-bg-tertiary);
 }
 
-/* --- 4. Структура страницы --- */
+/* Ensure warning banner is above header */
+.page_wrap {
+    position: relative;
+    padding-top: 0;
+}
+
+.warning-banner {
+    position: relative;
+    z-index: 1000; /* Above header */
+}
+
+.page_header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+}
+
+.page_body {
+    padding-top: calc(var(--header-height) + 20px);
+}
+
+/* If warning banner is present, adjust header position */
+.warning-banner + .page_header {
+    top: auto;
+}
+
+.warning-banner + .page_header + .page_body {
+    padding-top: calc(var(--header-height) + 20px);
+}
+
+/* --- 4. Page Structure --- */
 .page_wrap { background-color: var(--color-bg-main); color: var(--color-text-main); }
 .page_wrap a { color: var(--color-primary); text-decoration: none; }
 .page_wrap a:hover { text-decoration: underline; }
@@ -224,6 +265,17 @@ div.selected { background-color: var(--color-bg-selected); transition: backgroun
     line-height: 1.5;
     unicode-bidi: plaintext;
     text-align: start;
+}
+
+.default .text a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.default .text a:hover {
+    color: var(--color-primary-light);
+    text-decoration: underline;
 }
 
 /* Сервисные сообщения */

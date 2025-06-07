@@ -11,7 +11,7 @@
 </head>
 <body onload="CheckLocation();">
 <div class="page_wrap">
-<div class="warning-banner">
+<div class="warning-banner" role="alert" aria-live="polite">
     <div class="warning-content">
         <div class="warning-text">
             <strong>Внимание!</strong> Эта резервная копия была обработана с помощью скрипта для автоматизации замены элементов "In reply to this message" на цитаты.
@@ -19,10 +19,11 @@
         <div class="warning-text">
             Если вам кажется, что сообщения участников были отредактированы, вы можете посмотреть <a href="messages.html" class="warning-link">оригинальную копию без изменений</a>.
         </div>
-        <button class="close-warning" onclick="this.parentElement.parentElement.style.display='none'" aria-label="Закрыть уведомление">
+        <button class="close-warning" onclick="this.closest('.warning-banner').style.display='none'" aria-label="Закрыть уведомление">
             <span aria-hidden="true">×</span>
         </button>
     </div>
+</div>
 </div>
 <div class="page_header">
 <div class="content">
