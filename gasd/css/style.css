@@ -99,37 +99,41 @@ pre {
 /* --- 3. Warning Banner --- */
 .warning-banner {
     background-color: var(--color-bg-secondary);
-    border-left: 4px solid var(--color-primary);
-    padding: 12px 15px;
+    border-bottom: 1px solid var(--color-border);
+    padding: 12px 0;
     margin: 0;
     position: relative;
     color: var(--color-text-main);
-    border-radius: 0 0 var(--border-radius-normal) 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    width: 100%;
+    box-sizing: border-box;
 }
 .warning-content {
     max-width: var(--site-width);
     margin: 0 auto;
     position: relative;
-    padding-right: 30px;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 .warning-text {
     display: block;
-    margin-bottom: 5px;
     line-height: 1.5;
+    font-size: 14px;
 }
 .warning-link {
-    color: var(--color-primary-light);
+    color: var(--color-primary);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
+    transition: color 0.2s ease;
 }
 .warning-link:hover {
     text-decoration: underline;
-    color: var(--color-primary);
+    color: var(--color-primary-light);
 }
 .close-warning {
     position: absolute;
-    right: 10px;
+    right: 16px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
@@ -137,9 +141,9 @@ pre {
     font-size: 20px;
     cursor: pointer;
     color: var(--color-text-secondary);
-    padding: 5px;
+    padding: 4px 8px;
     line-height: 1;
-    border-radius: var(--border-radius-round);
+    border-radius: 4px;
     transition: all 0.2s ease;
 }
 .close-warning:hover {
